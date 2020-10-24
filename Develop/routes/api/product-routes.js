@@ -12,9 +12,9 @@ router.get('/', (req, res) => {
     },
     include: {
       model: Tag,
-      attribute: ['product_id'],
+      attribute: ['id'],
       through: ProductTag,
-     // as: 'productId'
+      //as: 'tagId'
     }
   })
   .then(dbProductData=> {
@@ -40,9 +40,9 @@ router.get('/:id', (req, res) => {
     },
     include: {
       model: Tag,
-      attributes: ['product_id'],
+      attributes: ['id'],
       through: ProductTag,
-     // as: 'productId'
+     // as: 'tag_id'
     }
   })
   .then(dbProductData=> {

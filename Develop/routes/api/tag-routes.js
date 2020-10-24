@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   Tag.findAll({
     include: {
       model: Product,
-      attributes: ['product_id'],
+      //attributes: ['product_id'],
       through: ProductTag
     }
   })
@@ -29,7 +29,8 @@ router.get('/:id', (req, res) => {
     },
     include: {
       model: Product,
-      attributes: ['product_name', 'price']
+     attributes: ['product_name', 'price']
+     //through: ProductTag
     }
   })
   .then(dbTagData=>{
@@ -58,12 +59,10 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  Tag.update({
+  Tag.update(req.body,{
     where: {
       id: req.params.id
     },
-    
-      title: req.body.title
     })
     .then(dbTagData=> {
       if(!dbTagData) {
@@ -85,7 +84,7 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
-  .them(dbTagData=> {
+  .then(dbTagData=> {
     if(!dbTagData) {
       res.status(404).json({message: 'No tag found with that id.'});
       return;
